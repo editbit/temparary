@@ -13,24 +13,32 @@ int main() {
 
 	system("mode con:cols=300 lines=100");
 	system("title console title");
-
+	/*
 	for (int i = 0; i < 100; i++) {
 		for (int j = 0; j < 100; j++) {
 			setColor(i%16);
-			cout << "â– ";
+			cout << "¡á";
 		}
 		cout << endl;
 	}
+	*/
+	for (int i = 0; i < 50; i++) {
+		for (int j = 0; j < 100; j+=2) {
+			setColor(i % 16);
+			printCharacters(j, i, "¡á");
+		}
+	}
+
 
 	COORD pos = { x, y };
 	setCursor(pos);
 
-	//system("color ë°°ê²½ìƒ‰ê¸€ìžìƒ‰");	//16ë¹„íŠ¸ ìˆ«ìž ë‘ ê°œ, ì „ì²´ ì ìš©.
+	//system("color ¹è°æ»ö±ÛÀÚ»ö");	//16ºñÆ® ¼ýÀÚ µÎ °³, ÀüÃ¼ Àû¿ë.
 	//system("color 3E");
 
 	cout << "##" << endl;
 
-	printCharacters(20, 20, "â€»");
+	printCharacters(20, 20, "¡Ø");
 
 	return 0;
 }
@@ -40,12 +48,12 @@ void setCursor(short x, short y) {
 }
 
 void setCursor(COORD pos) {
-	// ì½˜ì†” ì°½ ì»¤ì„œ ì´ë™
+	// ÄÜ¼Ö Ã¢ Ä¿¼­ ÀÌµ¿
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
 void setColor(int col) {
-	// ê¸€ìžìƒ‰ ì„¤ì •, col: 0~15 or FOREGROUND_ì‹
+	// ±ÛÀÚ»ö ¼³Á¤, col: 0~15 or FOREGROUND_½Ä
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), col);
 }
 
