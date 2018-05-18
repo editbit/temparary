@@ -17,7 +17,7 @@ int main() {
 	for (int i = 0; i < 100; i++) {
 		for (int j = 0; j < 100; j++) {
 			setColor(i%16);
-			cout << "¡á";
+			cout << "â– ";
 		}
 		cout << endl;
 	}
@@ -25,12 +25,12 @@ int main() {
 	COORD pos = { x, y };
 	setCursor(pos);
 
-	//system("color ¹è°æ»ö±ÛÀÚ»ö");	//16ºñÆ® ¼ýÀÚ µÎ °³, ÀüÃ¼ Àû¿ë.
+	//system("color ë°°ê²½ìƒ‰ê¸€ìžìƒ‰");	//16ë¹„íŠ¸ ìˆ«ìž ë‘ ê°œ, ì „ì²´ ì ìš©.
 	//system("color 3E");
 
 	cout << "##" << endl;
 
-	printCharacters(20, 20, "¡Ø");
+	printCharacters(20, 20, "â€»");
 
 	return 0;
 }
@@ -40,12 +40,12 @@ void setCursor(short x, short y) {
 }
 
 void setCursor(COORD pos) {
-	// ÄÜ¼Ö Ã¢ Ä¿¼­ ÀÌµ¿
+	// ì½˜ì†” ì°½ ì»¤ì„œ ì´ë™
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
 void setColor(int col) {
-	// ±ÛÀÚ»ö ¼³Á¤, col: 0~15 or FOREGROUND_½Ä
+	// ê¸€ìžìƒ‰ ì„¤ì •, col: 0~15 or FOREGROUND_ì‹
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), col);
 }
 
