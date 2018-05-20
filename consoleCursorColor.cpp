@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <Windows.h>
 
@@ -8,7 +9,7 @@ void setCursor(short x, short y);
 void setColor(int col);
 void printCharacters(short x, short y, const char *c);
 
-int main() {
+int test() {
 	int x = 8, y=1;
 
 	system("mode con:cols=300 lines=100");
