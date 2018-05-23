@@ -23,13 +23,13 @@ int main() {
 	vector<string> v, chV;
 	char kbInput;
 	int map[20][30] = { 0, };
-	int x = 0, y = 17, jumpCount = 0, state = 0, moveX = 0, xS=0, yS=0;
+	int x = 2, y = 15, jumpCount = 0, state = 0, moveX = 0, xS = 0, yS = 0, jumpable=2;
 	bool isOnGround = true, isItem = false;
 
-	
+
 	r.open("test_map.txt");
 
-	system("mode con:cols=300 lines=100");
+	system("mode con:cols=60 lines=30");
 	system("title console title");
 	system("color 0F");
 
@@ -38,9 +38,13 @@ int main() {
 	}
 	r.close();
 
-	
-	
-	
+
+	if (v.size() == 0)
+	{
+		return 0;
+	}
+
+
 
 	for (int i = 0; i < 20; ++i)
 	{
@@ -55,10 +59,10 @@ int main() {
 	while (true)
 	{
 		setCursor(0, 0);
-
-		for (int i = yS+0; i < 20; ++i)
+		//system("cls");
+		for (int i = yS + 0; i < 20 + yS; ++i)
 		{
-			for (int j = xS+0, l = 0; j < 20; ++j, l += 2)
+			for (int j = xS + 0, l = 0; j < 20+xS; ++j, l += 2)
 			{
 				//setCursor(l, i);
 				if (v[i][j] == '0')
@@ -66,7 +70,7 @@ int main() {
 				else if (v[i][j] == '1')
 					cout << "¡á";
 				else if (v[i][j] == '4')
-					cout << "¡Û";
+					cout << "¢Ý";
 				else if (v[i][j] == '2')
 					cout << "¡Ý";
 				else if (v[i][j] == '3')
@@ -86,13 +90,11 @@ int main() {
 			case 'a':
 				if (x - 1 >= 0) {
 					x -= 1;
-					xS -= 1;
 				}
 				break;
 			case 'd':
-				if (x + 1 <= v.at(0).size()-2) {
+				if (x + 1 <= v.at(0).size() - 2) {
 					x += 1;
-					xS += 1;
 				}
 				break;
 			case 'w':
@@ -104,7 +106,7 @@ int main() {
 			case ' ':
 				if (isOnGround)
 				{
-					jumpCount = 10;
+					jumpCount = 5;
 					isOnGround = false;
 					state = 2;
 				}
@@ -122,6 +124,12 @@ int main() {
 			break;
 
 
+		if (xS < v.at(0).size()-20)
+		{
+			xS += 1;
+		}
+
+		x += 1;
 
 		if (!isOnGround)
 		{
@@ -140,7 +148,7 @@ int main() {
 		{
 			isOnGround = true;
 		}
-		else if (v[y + 1][x] == 2)
+		else if (v[y + 1][x] == '2')
 		{
 			v[y + 1][x] = '0';
 			jumpCount = 2;
@@ -150,7 +158,7 @@ int main() {
 			isOnGround = false;
 		}
 
-		if (v[y][x] == 2) {
+		if (v[y][x] == '2') {
 			cout << "ÆÐ¹è" << endl;
 			break;
 		}
@@ -158,127 +166,21 @@ int main() {
 		{
 			v[y][x] = '4';
 
-			if (y == 19)
+			if (y == v.size() - 2)
 			{
 				cout << "³«»ç" << endl;
+				break;
+			}
+			else if (x >= v.at(0).size() -2)
+			{
+				cout << "clear"<< endl;
 				break;
 			}
 		}
 
 
 		Sleep(100);
-		/*
-
-		map[y][x] = 0;
-
-		if (_kbhit())
-		{
-			kbInput = _getch();
-			switch (kbInput)
-			{
-			case 'a':
-				if (x - 1 >= 0)
-					x -= 1;
-				break;
-			case 'd':
-				if (x + 1 <= 30)
-					x += 1;
-				break;
-			case 'w':
-
-				break;
-			case 's':
-
-				break;
-			case ' ':
-				if (isOnGround)
-				{
-					jumpCount = 10;
-					isOnGround = false;
-					state = 2;
-				}
-				break;
-			case 'n':
-				map[18 - rand() % 3][rand() % 13 + 1] = 2;
-				break;
-			case 'm':
-				map[18 - rand() % 3][rand() % 13 + 1] = 3;
-				break;
-
-			}
-		}
-		if (kbInput == 'q')
-			break;
-
-
-
-		if (!isOnGround)
-		{
-			if (jumpCount > 0)
-			{
-				jumpCount = jumpCount - 1;
-				y = y - 1;
-			}
-			else
-			{
-				y = y + 1;
-			}
-		}
-
-		if (map[y + 1][x] == -1)
-		{
-			isOnGround = true;
-		}
-		else if (map[y + 1][x] == 2)
-		{
-			map[y + 1][x] = 0;
-			jumpCount = 2;
-		}
-		else
-		{
-			isOnGround = false;
-		}
-
-		if (map[y][x] == 2) {
-			cout << "ÆÐ¹è"<<endl;
-			break;
-		}
-		else
-		{
-			map[y][x] = 1;
-
-			if (y == 19)
-			{
-				cout << "³«»ç" << endl;
-				break;
-			}
-		}
-
-
 		
-		for (int i = 0; i < 20; ++i)
-		{
-			for (int j = 0, l = 0; j < 30; ++j, l += 2)
-			{
-				setCursor(l, i);
-				if (map[i][j] == 0)
-					cout << "  ";
-				else if (map[i][j] == -1)
-					cout << "¡á";
-				else if (map[i][j] == 1)
-					cout << "¡Û";
-				else if (map[i][j] == 2)
-					cout << "¡Ý";
-				else if (map[i][j] == 3)
-					cout << "¡Ù";
-			}
-			cout << endl;
-		}
-		
-
-		Sleep(33);
-		setCursor(0, 0);
-		*/
 	}
 
 	return 0;
