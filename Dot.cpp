@@ -202,12 +202,10 @@ void setCursor(short x, short y) {
 }
 
 void setCursor(COORD pos) {
-	// 콘솔 창 커서 이동
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
 void setColor(int col) {
-	// 글자색 설정, col: 0~15 or FOREGROUND_식
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), col);
 }
 
