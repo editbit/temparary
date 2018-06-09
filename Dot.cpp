@@ -18,22 +18,22 @@ void printCharacters(short x, short y, const char *c);
 
 
 /*
-°ËÁ¤ 0
-ÆÄ¶õ 1
-ÃÊ·Ï 2
-¿Á»ö 3
-»¡°£ 4
-ÀÚÁÖ 5
-³ë¶õ 6
-Èò»ö 7
-È¸»ö 8
-¿¬ÇÑ ÆÄ¶õ 9
-¿¬ÇÑ ÃÊ·Ï 10
-¿¬ÇÑ ¿Á»ö 11
-¿¬ÇÑ »¡°£ 12
-¿¬ÇÑ ÀÚÁÖ 13
-¿¬ÇÑ ³ë¶õ 14
-ÁøÇÑ Èò»ö 15
+ê²€ì • 0
+íŒŒë€ 1
+ì´ˆë¡ 2
+ì˜¥ìƒ‰ 3
+ë¹¨ê°„ 4
+ìì£¼ 5
+ë…¸ë€ 6
+í°ìƒ‰ 7
+íšŒìƒ‰ 8
+ì—°í•œ íŒŒë€ 9
+ì—°í•œ ì´ˆë¡ 10
+ì—°í•œ ì˜¥ìƒ‰ 11
+ì—°í•œ ë¹¨ê°„ 12
+ì—°í•œ ìì£¼ 13
+ì—°í•œ ë…¸ë€ 14
+ì§„í•œ í°ìƒ‰ 15
 
 */
 
@@ -50,7 +50,7 @@ int main()
 
 	string fileName = "";
 
-	cout << "ÀĞÀ» ÆÄÀÏ ÀÌ¸§: ";
+	cout << "ì½ì„ íŒŒì¼ ì´ë¦„: ";
 	cin >> fileName;
 	if (fileName == "n")
 	{
@@ -111,23 +111,23 @@ int main()
 		else
 		{
 			count = 0;
-			if (ch == 'a')	// ¿ŞÂÊ
+			if (ch == 'a')	// ì™¼ìª½
 			{
 				if (curX > 0)
 					curX--;
 			}
-			else if (ch == 'd')	// ¿À¸¥ÂÊ
+			else if (ch == 'd')	// ì˜¤ë¥¸ìª½
 			{
 				if (curX < X_SIZE - 1)
 					curX++;
 			}
-			else if (ch == 'w')	// À§
+			else if (ch == 'w')	// ìœ„
 			{
 
 				if (curY > 0)
 					curY--;
 			}
-			else if (ch == 's')	// ¾Æ·¡
+			else if (ch == 's')	// ì•„ë˜
 			{
 				if (curY < Y_SIZE - 1)
 					curY++;
@@ -145,14 +145,14 @@ int main()
 				if (i == curY && j == curX)
 				{
 					setColor(curC);
-					cout << "¡Ü";
+					cout << "â—";
 				}
 				else
 				{
 					setColor(map[i][j]);
 
 					if (map[i][j] != 0)
-						cout << "¡á";
+						cout << "â– ";
 					else
 						cout << "  ";
 				}
@@ -174,14 +174,14 @@ int main()
 	}
 
 	setColor(7);
-	cout << "ÀúÀåÇÏ½Ã°Ú½À´Ï±î?";
+	cout << "ì €ì¥í•˜ì‹œê² ìŠµë‹ˆê¹Œ?";
 	cin >> fileName;
 
 	if (fileName == "q")
 		return 0;
 
-	ofstream os;                   // os¶õ º¯¼ö·Î ÆÄÀÏ Ãâ·Â ¼±¾ğ
-	os.open(fileName);   // os·Î ÅØ½ºÆ® ÆÄÀÏ ¿ÀÇÂ ( ÀÌ ½ÃÁ¡¿£ »ı¼º½ÃÅ²´Ù º¸¸é µË´Ï´Ù. )
+	ofstream os;  
+	os.open(fileName); 
 	for (int i = 0; i < Y_SIZE; ++i)
 	{
 		for (int j = 0; j < X_SIZE; ++j)
@@ -190,7 +190,7 @@ int main()
 		}
 		os << endl;
 	}
-	os.close();                      // ÆÄÀÏ ´İ±â ( ÆÄÀÏÀ» ¿­¾úÀ¸¸é Ç×»ó ÇØÁà¾ß ÇÕ´Ï´Ù. )
+	os.close();    
 
 
 	system("pause");
@@ -202,12 +202,12 @@ void setCursor(short x, short y) {
 }
 
 void setCursor(COORD pos) {
-	// ÄÜ¼Ö Ã¢ Ä¿¼­ ÀÌµ¿
+	// ì½˜ì†” ì°½ ì»¤ì„œ ì´ë™
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
 void setColor(int col) {
-	// ±ÛÀÚ»ö ¼³Á¤, col: 0~15 or FOREGROUND_½Ä
+	// ê¸€ììƒ‰ ì„¤ì •, col: 0~15 or FOREGROUND_ì‹
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), col);
 }
 
