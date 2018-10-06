@@ -1,0 +1,49 @@
+import asyncio
+import time
+import aiohttp
+import json
+
+isExit = False
+
+async def download(i: int):
+    global isExit
+    index = f'{i:02d}'
+    async with aiohttp.ClientSession() as session:
+        headers = {'contents_type':'Application/json', 'sss':'sssss'}
+        bodys = {'ieieie':'ieieieieieieieie'}
+        async with session.post(f'https://httpbin.org/post', headers = headers, json = bodys) as res:
+            #print(await res.text(), "\n")
+
+            if res.status == 500:
+                isExit = True
+                print("status 500")
+                return
+            elif res.status != 200:
+                print("not 200", res.status)
+                return
+
+            myText = await res.text()
+
+            try:
+               dic = json.loads(myText)
+            except:
+                print("json err")
+                return
+
+            if dic:
+                if 'data' in dic:
+                    dddd = json.loads(dic['data'])
+                    if 'ieieie' in dddd:
+                        print(dddd['ieieie'])
+
+count = 0
+while True:
+
+    tasks = [download(x) for x in range(5)]
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(asyncio.wait(tasks))
+    if isExit:
+        break
+    time.sleep(1)
+    print(count)
+    count += 1
